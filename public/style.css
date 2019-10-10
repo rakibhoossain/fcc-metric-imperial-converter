@@ -1,0 +1,145 @@
+body {
+  background: linear-gradient(170deg, #75e3f9 50%, #75f9cd);
+  background-attachment: fixed;
+  margin: 0;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;    /* Paired with display=flex, flex-direction:columns, and footer's margin-top=auto to pin footer to bottom at all times. */
+  
+  color: #222;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5em;
+}
+
+.container {
+  max-width: 700px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  
+  margin: 1em 0.5em 0.5em 0.5em;
+  padding: 2em;
+}
+
+
+h1 {
+  color: #3e8ff9;
+  font-size: 3em;
+  text-align: center;
+}
+
+h2 {
+  margin: -1.5em 0 2.5em 0;
+  color: #999;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: lighter;
+}
+
+h3 {
+  margin-top: 2em;
+  color: #f97e75;
+}
+
+
+.fourohfour {
+  text-align: center;
+}
+
+.fourohfour h1 {
+  margin: 1em 0;
+  font-size: 6em;
+}
+
+
+
+#testui {
+  border: 1px solid #3e8ff9;
+  border-radius: 3px;
+  margin: 2em 4em;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  
+  margin-top: 2em;
+}
+
+/* Making the placeholder text in the input form less dark: */
+::placeholder {
+  color: #999;
+}
+
+input[type=text] {
+  padding: 0.25em;
+  margin-right: 0.5em;
+}
+
+input[type=submit] {
+  background: #75f9cd;
+  border: 2px solid #3e8ff9;
+  padding: 0.2em 1em;
+  color: #3e8ff9;
+  font-weight: 800;
+  
+  transition: all 200ms;
+}
+
+input[type=submit]:hover {
+  background: #3e8ff9;
+  color: #75f9cd;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+input[type=submit]:active {
+  box-shadow: none;
+}
+
+
+#result {
+  text-align: center;
+  min-height: 1.5em;  /* to avoid having the page elements jump around when the results are returned */
+}
+
+
+
+pre {
+  background: #eee;
+  border-left: 0.5em solid #75f9cd;
+  border-radius: 3px;
+  margin: 1em;
+  padding: 1em;
+}
+
+code {
+  background: #eee;
+  padding: 0.3em 1em;
+  border-radius: 3px;
+}
+
+
+
+footer {
+  margin-top: auto;    /* paired with body's display=flex to keep the footer pinned to the bottom of the page in all conditions */
+  
+  background: #222;
+  width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  color: #aaa;
+  text-align: center;
+  font-size: 0.8em;
+  padding: 0.3em 2em;
+}
+
+footer a{
+  color: #ccc;
+}
+
+footer a:hover {
+  color: #c1ecf4;
+}

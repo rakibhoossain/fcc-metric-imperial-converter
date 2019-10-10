@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>  
+  
+  <head>
+    <title>Home - Metric-Imperial Converter for freeCodeCamp - by Rakib</title>
+    <meta name="description" content="A project for freeCodeCamp's Information Security and Quality Assurance certification">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.glitch.com/3521b72b-1e6f-4711-9914-d6df58c8ba57%2Ffavicon.jpg?1554718028189">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="/public/style.css">
+    
+    <!-- We'll be using jQuery for handling the form submission, so let's load it in (link/script in HTTPS because our site will be HTTPS): -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous">
+    </script>
+    
+  </head>
+  
+  
+  <body>
+    <div class="container">
+      
+      <header>
+        <h1>Metric-Imperial Converter</h1>
+        <h2>(a project for freeCodeCamp's Information Security and Quality Assurance certification)</h2>
+      </header>
+      
+      
+      
+      <h3>Front-End</h3>
+      
+      <p>
+        Use this API to easily convert back and forth from:
+        <ul>
+          <li>miles (mi) to kilometers (km),</li>
+          <li>pounds (lbs) to kilograms (kg), and</li>
+          <li>gallons (gal) to liters (L).</li>
+        </ul>
+      </p>
+    
+      
+      <div id="testui">
+
+        <form id="convertForm">
+          <input type="text" id="convertField" name="input" placeholder="3.4/6mi">
+          <input id="convert" type="submit" value="Convert!">
+        </form>
+
+        <!-- We'll be outputting the string-formatted result of the unit conversion to the following paragraph... -->
+        <p id="result"></p>
+        <!-- ... and the JSON formatted result of the unit conversion to the following code block: -->
+        <!-- <code id="jsonResult"></code>         uncommented from original boilerplate to keep the site tidy -->
+        
+        <!-- the script for when the form gets submitted: -->
+        <script>
+          $(function() {
+            $('#convertForm').submit(function() {
+              event.preventDefault();    // To stop the page from reloading when the form is submitted.
+              $.ajax({
+                url: '/api/convert',
+                type: 'get',
+                data: $('#convertForm').serialize(),
+                success: function(data) {
+                  let content = data.string || data;  // If the result is one of our "invalid" statements, then there won't be a data.string, and we'll return data only
+                  $('#result').html('<a href="/api/convert?' + $("#convertForm").serialize() + '">' + content + '</a>');
+                  
+                  // Original boilerplate (with .split()/.join() spacing mods in the JSON response), replaced with above because the original was rather messy on screen:
+                  // $('#result').text(data.string || data);
+                  // $('#jsonResult').text(JSON.stringify(data).split(",").join(", ").split(":").join(": ") );
+                }
+              });
+            });
+          });
+        </script>
+      </div>
+      
+      
+      
+    
+      <h3>Example return</h3>
+      <p>
+        This API will respond to a GET request at <code>/api/convert?input=&ltnumber&gt&ltunit&gt</code> with a JSON object like this example:
+      </p>
+      <pre><code>{
+    initNum: 3.1,
+    initUnit: 'mi',
+    returnNum: 4.98895,
+    returnUnit: 'km',
+    string: '3.1 miles converts to 4.98895 kilometers'
+  }</code></pre>
+    
+      <p>
+        If the submitted quantity is invalid, the API will respond with <code>"invalid number"</code>. If it's the unit that is invalid,
+        the response will be <code>"invalid unit"</code>. If both the quantity and unit are invalid, then the API will respond with <code>"invalid number and unit"</code>.
+      </p>
+      <p>
+        If a unit is submitted without a quantity, the API will assume a quantity of 1 should be converted.
+      </p>
+      
+      
+      
+      <div id="userstories">
+        <h3>User Stories</h3>
+        <ol>
+          <li>I will help prevent the client from trying to guess(sniff) the MIME type.</li>
+          <li>I will prevent cross-site scripting (XSS) attacks.</li>
+          <li>I can <b>GET</b> <code>/api/convert</code> with a single parameter containing an accepted number and unit and have it converted.</li>
+          <li>Hint: Split the input by looking for the index of the first character.</li>
+          <li>I can convert 'gal' to 'L' and vice versa. <b>(1 gal to 3.78541 L)</b></li>
+          <li>I can convert 'lbs' to 'kg' and vice versa. <b>(1 lbs to 0.453592 kg)</b></li> 
+          <li>I can convert 'mi' to 'km' and vice versa. <b>(1 mi to 1.60934 km)</b></li>
+          <li>If my unit of measurement is invalid, returned will be 'invalid unit'.</li>
+          <li>If my number is invalid, returned with will 'invalid number'.</li>
+          <li>If both are invalid, return will be 'invalid number and unit'.</li>
+          <li>I can use fractions, decimals or both in my parameter(ie. 5, 1/2, 2.5/6), but if nothing is provided it will default to 1.</li>
+          <li>My return will consist of the initNum, initUnit, returnNum, returnUnit, and string spelling out units in format <code>{initNum} {initial_Units} converts to {returnNum} {return_Units}</code> with the result rounded to 5 decimals.</li>
+          <li>All 16 unit tests are complete and passing.</li>
+          <li>All 5 functional tests are complete and passing.</li>
+        </ol>
+      </div>
+    
+    </div>  <!-- END of container -->
+
+  </body>
+</html>
